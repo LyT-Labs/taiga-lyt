@@ -1,5 +1,3 @@
-version: "3.5"
-
 x-environment:
   &default-back-environment
   # These environment variables will be used by taiga-back and taiga-async.
@@ -40,9 +38,9 @@ services:
   taiga-db:
     image: postgres:12.3
     environment:
-      POSTGRES_DB: "taiga"
-      POSTGRES_USER: "${POSTGRES_USER}"
-      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      - POSTGRES_DB: "taiga"
+      - POSTGRES_USER: "${POSTGRES_USER}"
+      - POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
       interval: 2s
