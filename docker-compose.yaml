@@ -105,7 +105,7 @@ services:
   taiga-front:
     image: taigaio/taiga-front:latest
     environment:
-      BASE_URL: ${TAIGA_SCHEME}://${TAIGA_DOMAIN}
+      TAIGA_URL: ${TAIGA_SCHEME}://${TAIGA_DOMAIN}
       TAIGA_WEBSOCKETS_URL: ${WEBSOCKETS_SCHEME}://${TAIGA_DOMAIN}
       TAIGA_SUBPATH: ${SUBPATH}
     networks:
@@ -146,6 +146,8 @@ services:
 
   taiga-gateway:
     image: nginx:1.19-alpine
+    environment:
+      - BASE_URL=${TAIGA_SCHEME}://${TAIGA_DOMAIN}${SUBPATH}
     ports:
       - "80:80"  # Expuesto para que Coolify lo detecte
     volumes:
